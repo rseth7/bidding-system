@@ -1,0 +1,55 @@
+#LOGGING
+logging:
+  config: classpath:log4j2.xml
+
+#Application Info
+application:
+  name: @project.artifactId@
+  version: @project.version@
+
+#application:
+
+#Server Config
+server:
+  port: 9100
+  tomcat:
+    max-connections: 200
+    max-threads: 150
+    min-spare-threads: 10
+    accept-count: 150
+    access-log:
+      buffered: false
+      directory: /Users/shilpigoyal/log/bidding-system
+      enabled: true
+      file-date-format: .yyyy-MM-dd
+      pattern: "[%{yyyy-MM-dd HH:mm:ss.SSS}t] %h \"%r\" %s %b %Dms \"%{Referer}i\""
+      prefix: ${spring.profiles.active}_access
+      rename-on-rotate: true
+      request-attributes-enabled: true
+      rotate: true
+      suffix: .log
+
+spring:
+  profiles:
+    active: local
+#Database Config
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    driver-class-name: org.h2.Driver
+    #url: jdbc:h2:file:/Users/shilpigoyal/h2-data/biddingsystem -- file based
+    url: jdbc:h2:mem:biddingsystem
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+
+
+
+
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration strict="true">
+
+    <Properties>
+        <Property name="baseDir">/Users/shilpigoyal/log/bidding-system</Property>
+        <Property name="prefix">application</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="APP_FILE" fileName="${basedir}/${prefix}.log"
+                     filePattern="${basedir}/archive/${prefix}-%d{yyyy-MM-dd}-%i.log.gz">
+            <!--<MaskedJsonLayout charset="UTF-8"/>-->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <!--<MaskedJsonLayout charset="UTF-8"/>-->
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.cars24.biddingsystem" level="INFO" additivity="false">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="org.hibernate" level="INFO" additivity="false">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Root level="WARN">
+            <AppenderRef ref="APP_FILE"/>
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
